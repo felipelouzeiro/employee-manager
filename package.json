@@ -1,0 +1,28 @@
+{
+  "name": "employee-manager-api",
+  "version": "1.0.0",
+  "description": "API desenvolvida para gerência de informações de funcionários em uma empresa; Desenvolvida em Node + MySQL + Sequelize",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "keywords": [
+    "API",
+    "Sequelize",
+    "MySQL",
+    "Node",
+    "JWT",
+    "MSC"
+  ],
+  "author": "Felipe Alves Louzeiro",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.17.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.12.0",
+    "nodemon": "^2.0.15"
+  }
+}
