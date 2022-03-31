@@ -1,6 +1,7 @@
-const { employeeSchema } = require("../../utils/schemas/schemas");
+const { employeeSchema, loginSchema } = require("../../utils/schemas/schemas");
 const { Employee } = require("../models");
 const handlingError = require("../../utils/helpers/handlingError")
+const { tokenGenerate } = require("../../utils/helpers/JWT")
 
 const create = async ({ name, email, department, salary, birth_date, password }) => {
   try {
@@ -17,8 +18,28 @@ const create = async ({ name, email, department, salary, birth_date, password })
   return response.dataValues;
 };
 
+const login = async ({email, password}) => {
+  try {
+    await loginSchema.validate({ email, password })
+  } catch (error) {
+    if (error) { throw handlingError(404, error.errors[0]); }
+  }
+  
+  const employeeFound = await Employee.findOne({ where: { email } });
+  
+  if (!employeeFound || employeeFound.password !== password) {
+    throw handlingError(404, 'Invalid e-mail or password');
+  } 
+  
+  const { password: pass, ...userWithoutPassword } = employeeFound.dataValues;
+  
+  const token = tokenGenerate(userWithoutPassword);
+
+  return { token };
+};
 
 
 module.exports = {
   create,
+  login,
 }

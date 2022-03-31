@@ -1,4 +1,4 @@
-const { tokenGenerate } = require("../../utils/helpers/JWT.JS");
+const { tokenGenerate } = require("../../utils/helpers/JWT.js");
 const employeeServices = require("../services/employee")
 const createEmployee = async (req, res, next) => {
   try {
@@ -17,6 +17,19 @@ const createEmployee = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    const token = await employeeServices.login({email, password});
+
+    return res.status(200).json(token);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createEmployee,
+  login,
 }
