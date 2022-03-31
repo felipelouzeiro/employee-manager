@@ -4,7 +4,9 @@
   "description": "API desenvolvida para gerência de informações de funcionários em uma empresa; Desenvolvida em Node + MySQL + Sequelize",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "npm run test",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "keywords": [
     "API",
@@ -17,6 +19,7 @@
   "author": "Felipe Alves Louzeiro",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "mysql2": "^2.3.3",
     "sequelize": "^6.17.0"
