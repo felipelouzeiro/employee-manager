@@ -9,4 +9,6 @@ const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+db.Employee = require("./Employee")(sequelize, Sequelize);
+
 module.exports = db;
