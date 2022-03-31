@@ -17,6 +17,16 @@ const employeeSchema = yup.object({
   .required('Password is required.')
 });
 
+const loginSchema = yup.object({
+  email: yup.string()
+  .email('Invalid e-mail.')
+  .required('E-mail is required.'),
+
+  password: yup.string()
+  .required('Password is required.'),
+});
+
 module.exports = {
   employeeSchema,
+  loginSchema,
 }
