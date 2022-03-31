@@ -1,5 +1,6 @@
 const { employeeSchema } = require("../../utils/schemas/schemas");
 const { Employee } = require("../models");
+const handlingError = require("../../utils/helpers/handlingError")
 
 const create = async ({ name, email, department, salary, birth_date, password }) => {
   try {

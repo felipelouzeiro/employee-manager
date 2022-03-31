@@ -1,5 +1,6 @@
 const express = require('express');
 const employeeRoute = require("./api/routes")
+const middleareError = require("./middlewares/errorMiddlware")
 
 const app = express();
 app.use(express.json());
@@ -11,5 +12,6 @@ app.use(employeeRoute)
 // app.use('/', (req, res) => {
 //   res.send({message: "funcionando"})
 // });
+app.use(middleareError)
 
 module.exports = app;
