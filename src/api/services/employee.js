@@ -1,7 +1,7 @@
 const { employeeSchema, loginSchema } = require("../../utils/schemas/schemas");
 const { Employee } = require("../models");
-const handlingError = require("../../utils/helpers/handlingError")
-const { tokenGenerate } = require("../../utils/helpers/JWT")
+const handlingError = require("../../utils/helpers/handlingError");
+const { tokenGenerate } = require("../../utils/helpers/JWT");
 
 const create = async ({ name, email, department, salary, birth_date, password }) => {
   try {
@@ -75,6 +75,29 @@ const update = async ({ id, name, email, department, salary, birth_date, passwor
   return response.dataValues;
 }
 
+const reportSalary = async () => {
+  const employees = await Employee.findAll({ attributes: { exclude: 'password' } }); // retorna array
+
+  const maxSalary = employees.reduce(function(prev, curr ) {
+    return (Number(prev.salary) > Number(curr.salary)) ? prev : curr
+  });
+  
+  const minSalary = employees.reduce(function(prev, curr ) {
+    return (Number(prev.salary) < Number(curr.salary)) ? prev : curr
+  });
+
+  const sumSalaries = employees.map(employee => employee.salary)
+    .reduce((prev, curr) => prev + Number(curr), 0);
+
+  const average = (sumSalaries / employees.length).toFixed(2).toString();
+
+  return {
+    "lowest": minSalary,
+    "highest": maxSalary,
+    "average": average,
+  }
+}
+
 module.exports = {
   create,
   login,
@@ -82,4 +105,15 @@ module.exports = {
   getById,
   deleteById,
   update,
+  reportSalary,
 }
+
+// --- Solução alternativa ---
+
+// const minSalary = await Employee.findAll({
+//   where: sequelize.where([sequelize.fn('min', sequelize.col('salary')), 'minSalary']),
+// });
+
+// const maxSalary = await Employee.findAll({
+//   where: sequelize.where([sequelize.fn('min', sequelize.col('salary')), 'minSalary']),
+// });

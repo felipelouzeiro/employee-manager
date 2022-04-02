@@ -77,6 +77,17 @@ const updateEmployee = async (req, res, next) => {
   }
 }
 
+const employeeReportSalary = async (_req, res, next) => {
+  try {
+    const reportsalaries = await employeeServices.reportSalary();
+
+    return res.status(200).json(reportsalaries);
+  } catch (err) {
+    next(err);
+  }
+};
+
+
 module.exports = {
   createEmployee,
   login,
@@ -84,4 +95,5 @@ module.exports = {
   getEmployeeById,
   deleleEmployeeById,
   updateEmployee,
+  employeeReportSalary,
 }

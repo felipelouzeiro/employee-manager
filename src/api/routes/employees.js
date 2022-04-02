@@ -6,7 +6,8 @@ const {
   getEmployees, 
   getEmployeeById, 
   deleleEmployeeById, 
-  updateEmployee 
+  updateEmployee, 
+  employeeReportSalary
 } = require('../controllers/employee');
 
 const router = express.Router({ mergeParams: true });
@@ -16,5 +17,6 @@ router.get('/', authMiddlware, getEmployees); // apartir daqui será necessário
 router.get('/:id', authMiddlware, getEmployeeById);
 router.delete('/:id', authMiddlware, deleleEmployeeById);
 router.put('/:id', authMiddlware, updateEmployee);
+router.get('/salary', authMiddlware, employeeReportSalary);
 
 module.exports = router;
