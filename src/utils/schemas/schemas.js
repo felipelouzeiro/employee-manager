@@ -8,7 +8,7 @@ const employeeSchema = yup.object({
   .required('E-mail is required.'),
   department: yup.string()
   .required('Department is required.'),
-  salary: yup.number()
+  salary: yup.string()
   .required('Salary is required.'),
   birth_date: yup.string()
   .required('Birth_date is required.'),

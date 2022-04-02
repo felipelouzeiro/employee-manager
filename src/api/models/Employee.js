@@ -24,7 +24,7 @@ const attributes = {
   },
 
   salary: { //4000.00
-    type: DataTypes.DOUBLE,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 
