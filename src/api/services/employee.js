@@ -45,7 +45,7 @@ const findAll = async () => {
 };
 
 const getById = async (id) => {
-  const employee = await Employee.findOne({ where: { id } });
+  const employee = await Employee.findByPk(id);
 
   if (!employee) { throw handlingError(404, 'Employee not registered'); }
 
@@ -57,10 +57,29 @@ const deleteById = async (id) => {
     where: { id: id } });
 };
 
+const update = async ({ id, name, email, department, salary, birth_date, password }) => {
+  try {
+    await employeeSchema.validate({ name, email, department, salary, birth_date, password })
+  } catch (error) {
+    if (error) { throw handlingError(404, error.errors[0]); }
+  }
+
+  const registeredEmployee = await Employee.findByPk(id);
+
+  if (!registeredEmployee) { throw handlingError(404, 'Employee not registered'); }
+
+  const response = await Employee.update(
+    { name, email, department, salary, birth_date, password },
+    { where: { id: id } });
+
+  return response.dataValues;
+}
+
 module.exports = {
   create,
   login,
   findAll,
   getById,
   deleteById,
+  update,
 }

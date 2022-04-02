@@ -64,10 +64,24 @@ const deleleEmployeeById = async (req, res, next) => {
   }
 };
 
+const updateEmployee = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { name, email, department, salary, birth_date, password } = req.body;
+
+    const response = await employeeServices.update({ id, name, email, department, salary, birth_date, password })
+    res.status(200).send(response);
+
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   createEmployee,
   login,
   getEmployees,
   getEmployeeById,
   deleleEmployeeById,
+  updateEmployee,
 }
