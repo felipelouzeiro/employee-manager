@@ -44,8 +44,17 @@ const findAll = async () => {
   return employees;
 };
 
+const getById = async (id) => {
+  const employee = await Employee.findOne({ where: { id } });
+
+  if (!employee) { throw handlingError(404, 'Employee not registered'); }
+
+  return employee;
+};
+
 module.exports = {
   create,
   login,
   findAll,
+  getById,
 }
