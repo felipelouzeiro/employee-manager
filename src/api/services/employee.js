@@ -38,8 +38,14 @@ const login = async ({email, password}) => {
   return { token };
 };
 
+const findAll = async () => {
+  const employees = await Employee.findAll({ attributes: { exclude: 'password' } });
+
+  return employees;
+};
 
 module.exports = {
   create,
   login,
+  findAll,
 }
