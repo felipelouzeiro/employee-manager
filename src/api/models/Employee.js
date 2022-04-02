@@ -29,7 +29,7 @@ const attributes = {
   },
 
   birth_date: { //01-01-1983
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 

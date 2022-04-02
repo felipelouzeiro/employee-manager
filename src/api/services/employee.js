@@ -78,6 +78,8 @@ const update = async ({ id, name, email, department, salary, birth_date, passwor
 const reportSalary = async () => {
   const employees = await Employee.findAll({ attributes: { exclude: 'password' } }); // retorna array
 
+  if (employees.length < 1) { throw handlingError(404, 'No registered employees'); }
+
   const maxSalary = employees.reduce(function(prev, curr ) {
     return (Number(prev.salary) > Number(curr.salary)) ? prev : curr
   });
