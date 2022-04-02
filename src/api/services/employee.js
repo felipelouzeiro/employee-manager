@@ -52,9 +52,15 @@ const getById = async (id) => {
   return employee;
 };
 
+const deleteById = async (id) => {
+  await Employee.destroy({
+    where: { id: id } });
+};
+
 module.exports = {
   create,
   login,
   findAll,
   getById,
+  deleteById,
 }
