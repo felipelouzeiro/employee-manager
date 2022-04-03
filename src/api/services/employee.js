@@ -5,14 +5,14 @@ const { tokenGenerate } = require("../../utils/helpers/JWT");
 
 const create = async ({ name, email, department, salary, birth_date, password }) => {
   try {
-    await employeeSchema.validate({ name, email, department, salary, birth_date, password })
+    await employeeSchema.validate({ name, email, department, salary, birth_date, password });
   } catch (error) {
-    if (error) { throw handlingError(404, error.errors[0]); }
+    if (error) { throw handlingError(404, error.errors[0]) }
   }
 
   const alreadyEmployee = await Employee.findOne({ where: { email } });
 
-  if (alreadyEmployee) { throw handlingError(409, 'Employee already registered'); }
+  if (alreadyEmployee) { throw handlingError(409, 'Employee already registered') }
 
   const response = await Employee.create({ name, email, department, salary, birth_date, password });
   return response.dataValues;
@@ -20,9 +20,9 @@ const create = async ({ name, email, department, salary, birth_date, password })
 
 const login = async ({email, password}) => {
   try {
-    await loginSchema.validate({ email, password })
+    await loginSchema.validate({ email, password });
   } catch (error) {
-    if (error) { throw handlingError(404, error.errors[0]); }
+    if (error) { throw handlingError(404, error.errors[0]) }
   }
   
   const employeeFound = await Employee.findOne({ where: { email } });
@@ -47,12 +47,16 @@ const findAll = async () => {
 const getById = async (id) => {
   const employee = await Employee.findByPk(id);
 
-  if (!employee) { throw handlingError(404, 'Employee not registered'); }
+  if (!employee) { throw handlingError(404, 'Employee not registered') }
 
   return employee;
 };
 
 const deleteById = async (id) => {
+  const registeredEmployee = await Employee.findByPk(id);
+
+  if (!registeredEmployee) { throw handlingError(404, 'Employee not registered') }
+
   await Employee.destroy({
     where: { id: id } });
 };
@@ -61,12 +65,12 @@ const update = async ({ id, name, email, department, salary, birth_date, passwor
   try {
     await employeeSchema.validate({ name, email, department, salary, birth_date, password })
   } catch (error) {
-    if (error) { throw handlingError(404, error.errors[0]); }
+    if (error) { throw handlingError(404, error.errors[0]) }
   }
 
   const registeredEmployee = await Employee.findByPk(id);
 
-  if (!registeredEmployee) { throw handlingError(404, 'Employee not registered'); }
+  if (!registeredEmployee) { throw handlingError(404, 'Employee not registered') }
 
   const response = await Employee.update(
     { name, email, department, salary, birth_date, password },
@@ -78,7 +82,7 @@ const update = async ({ id, name, email, department, salary, birth_date, passwor
 const reportSalary = async () => {
   const employees = await Employee.findAll({ attributes: { exclude: 'password' } }); // retorna array
 
-  if (employees.length < 1) { throw handlingError(404, 'No registered employees'); }
+  if (employees.length < 1) { throw handlingError(404, 'No registered employees') }
 
   const maxSalary = employees.reduce(function(prev, curr ) {
     return (Number(prev.salary) > Number(curr.salary)) ? prev : curr
