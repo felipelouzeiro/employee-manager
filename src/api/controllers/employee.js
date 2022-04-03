@@ -1,5 +1,5 @@
 const { tokenGenerate } = require("../../utils/helpers/JWT.js");
-const employeeServices = require("../services/employee")
+const employeeServices = require("../services/employee");
 
 const createEmployee = async (req, res, next) => {
   try {
@@ -69,7 +69,7 @@ const updateEmployee = async (req, res, next) => {
     const { id } = req.params;
     const { name, email, department, salary, birth_date, password } = req.body;
 
-    const response = await employeeServices.update({ id, name, email, department, salary, birth_date, password })
+    const response = await employeeServices.update({ id, name, email, department, salary, birth_date, password });
     res.status(200).send(response);
 
   } catch (error) {

@@ -7,7 +7,7 @@ const {
   getEmployeeById, 
   deleleEmployeeById, 
   updateEmployee, 
-  employeeReportSalary
+  employeeReportSalary,
 } = require('../controllers/employee');
 
 const router = express.Router({ mergeParams: true });

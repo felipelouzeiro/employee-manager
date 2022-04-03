@@ -10,7 +10,7 @@ module.exports = async (req, _res, next) => {
 
     const validate = tokenValidate(authorization);
 
-    if (!validate) { throw handlingError(401, 'Expired or invalid token'); }
+    if (!validate) { throw handlingError(401, 'Expired or invalid token') }
 
     const user = await Employee.findOne({ where: { email: validate } });
     req.user = user; // passando conteúdo do usuario logado para as próximas rotas

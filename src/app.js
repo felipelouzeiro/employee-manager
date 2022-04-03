@@ -8,10 +8,8 @@ app.use(express.json());
 const db = require("./api/models");
 db.sequelize.sync();
 
-app.use(employeeRoute)
-// app.use('/', (req, res) => {
-//   res.send({message: "funcionando"})
-// });
-app.use(middleareError)
+app.use(employeeRoute);
+
+app.use(middleareError);
 
 module.exports = app;
