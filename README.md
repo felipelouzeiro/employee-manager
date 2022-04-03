@@ -10,6 +10,10 @@ Bem vindo a Employee Manager, API REST desenvolvida para gerenciar informações
   - sequelize: ^6.17.0
   - yup: ^0.32.11
 
+## Testes de Integração:
+  - jest: ^27.5.1
+  - supertest: ^6.2.2
+
 ## Para testar em seu ambiente:
 
 - Clone e acesse o diretório do projeto, em seguida instale as dependecias com o comando `npm install`.
@@ -77,5 +81,5 @@ Lembre-se de renomear o arquivo para '.env'!
 #### *Is coming.*
 
 
-## Cobertura de testes em xx atualmente;
-- Para executar os testes, rode o comando xxxx no terminal.
+## Testes de integração:
+- Para executar os testes, rode o comando `npm run test` no terminal.
