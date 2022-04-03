@@ -4,7 +4,7 @@
   "description": "API desenvolvida para gerência de informações de funcionários em uma empresa; Desenvolvida em Node + MySQL + Sequelize",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test",
+    "test": "jest",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js"
   },
@@ -28,6 +28,8 @@
   },
   "devDependencies": {
     "eslint": "^8.12.0",
-    "nodemon": "^2.0.15"
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }
